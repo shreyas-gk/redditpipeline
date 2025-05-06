@@ -1,68 +1,70 @@
+# Data Pipeline with Reddit, Airflow, Celery, Postgres, S3, AWS Glue, Athena, and Redshift
 
-# Reddit ETL Data Pipeline
+This project provides a comprehensive data pipeline solution to extract, transform, and load (ETL) Reddit data into a Redshift data warehouse. The pipeline leverages a combination of tools and services including Apache Airflow, Celery, PostgreSQL, Amazon S3, AWS Glue, Amazon Athena, and Amazon Redshift.
 
-This project provides a scalable, cloud-native Extract, Transform, Load (ETL) solution to ingest and analyze Reddit data. It demonstrates how to build a complete data pipeline using open-source tools and AWS services.
+## Table of Contents
 
-## Project Overview
+- [Overview](#overview)
+- [Architecture](#architecture)
+- [Prerequisites](#prerequisites)
+- [System Setup](#system-setup)
+- [Video](#video)
 
-The pipeline extracts data from Reddit, transforms and catalogs it using AWS Glue, stores it in Amazon S3, and loads it into Amazon Redshift for analytics. Data can then be visualized using tools like Power BI, Tableau, Amazon QuickSight, or Looker Studio.
+## Overview
 
-This project is ideal for learning how to:
-- Orchestrate data workflows using Airflow and Celery
-- Automate schema discovery and data transformation using AWS Glue
-- Implement hybrid querying with Athena and Redshift
-- Handle unstructured and semi-structured data efficiently in the cloud
+The pipeline is designed to:
 
-## Architecture Diagram
+1. Extract data from Reddit using its API.
+2. Store the raw data into an S3 bucket from Airflow.
+3. Transform the data using AWS Glue and Amazon Athena.
+4. Load the transformed data into Amazon Redshift for analytics and querying.
 
-![ETL Architecture](./path-to-your-image.png)
+## Architecture
+![RedditDataEngineering.png](assets%2FRedditDataEngineering.png)
+1. **Reddit API**: Source of the data.
+2. **Apache Airflow & Celery**: Orchestrates the ETL process and manages task distribution.
+3. **PostgreSQL**: Temporary storage and metadata management.
+4. **Amazon S3**: Raw data storage.
+5. **AWS Glue**: Data cataloging and ETL jobs.
+6. **Amazon Athena**: SQL-based data transformation.
+7. **Amazon Redshift**: Data warehousing and analytics.
 
-## Tech Stack
+## Prerequisites
+- AWS Account with appropriate permissions for S3, Glue, Athena, and Redshift.
+- Reddit API credentials.
+- Docker Installation
+- Python 3.9 or higher
 
-- **Orchestration:** Apache Airflow, Celery, PostgreSQL (metadata DB)
-- **Cloud Services:** Amazon S3, AWS Glue, Amazon Athena, Amazon Redshift
-- **Visualization:** Power BI, Tableau, Amazon QuickSight, Looker Studio
-- **Infrastructure:** Docker
+## System Setup
+1. Clone the repository.
+   ```bash
+    git clone https://github.com/airscholar/RedditDataEngineering.git
+   ```
+2. Create a virtual environment.
+   ```bash
+    python3 -m venv venv
+   ```
+3. Activate the virtual environment.
+   ```bash
+    source venv/bin/activate
+   ```
+4. Install the dependencies.
+   ```bash
+    pip install -r requirements.txt
+   ```
+5. Rename the configuration file and the credentials to the file.
+   ```bash
+    mv config/config.conf.example config/config.conf
+   ```
+6. Starting the containers
+   ```bash
+    docker-compose up -d
+   ```
+7. Launch the Airflow web UI.
+   ```bash
+    open http://localhost:8080
+   ```
 
-## Pipeline Breakdown
 
-1. **Data Extraction**
-   - Extract Reddit data using custom scripts or Reddit API.
-   - Scheduled via Apache Airflow DAGs.
-  
-2. **Transformation & Storage**
-   - Clean and transform data with AWS Glue jobs and crawlers.
-   - Store raw and transformed data in separate S3 buckets.
-
-3. **Query & Load**
-   - Load transformed data into Amazon Redshift.
-   - Enable ad-hoc querying with Amazon Athena.
-
-4. **Visualization**
-   - Connect data warehouse to BI tools for interactive dashboards and reporting.
-
-## Getting Started
-
-Clone the repository and follow the setup instructions:
-
-```bash
-git clone https://github.com/your-username/reddit-etl-pipeline.git
-cd reddit-etl-pipeline
-```
-
-> *Docker, AWS credentials, and environment variables must be configured. Setup guide coming soon.*
-
-## Sample Use Cases
-
-- Reddit sentiment analysis  
-- Trending topic analysis over time  
-- Subreddit activity heatmaps  
-- Comment volume monitoring  
-
-## Contact
-
-If you're interested in collaborating or hiring for data engineering work, feel free to reach out on [LinkedIn](https://www.linkedin.com/in/shreyasgk/) or email me directly.
-
-## Tags
-
-`#ETL` `#DataEngineering` `#AWS` `#ApacheAirflow` `#Redshift` `#Glue` `#Athena` `#RedditAPI` `#BigData`
+## Video
+[![Reddit Data Engineering](https://img.youtube.com/vi/LSlt6iVI_9Y/0.jpg)](https://www.youtube.com/watch?v=LSlt6iVI_9Y)
